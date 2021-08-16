@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sysinfo
+spec:
+  template:
+    spec:
+      containers:
+      - name: printinfo
+        image: carlos2380/printinfo:v3
+        command: ["./main", "--pathfile=/work-dir/data.txt"]
+        volumeMounts:
+        - name: workdir
+          mountPath: /work-dir
+      # These containers are run during pod initialization
+      initContainers:
+      - name: sysinfo
+        image: carlos2380/sysinfo:v3
+        command: ["./main", "--pathfile=/work-dir/data.txt"]
+        volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      volumes:
+      - name: workdir
+        emptyDir: {}
+      restartPolicy: Never
