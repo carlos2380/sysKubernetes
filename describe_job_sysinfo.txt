@@ -1,0 +1,43 @@
+Name:           sysinfo
+Namespace:      default
+Selector:       controller-uid=03eb1244-f6ba-4ca6-b5c7-7a54a7be0bd0
+Labels:         controller-uid=03eb1244-f6ba-4ca6-b5c7-7a54a7be0bd0
+                job-name=sysinfo
+Annotations:    <none>
+Parallelism:    1
+Completions:    1
+Start Time:     Mon, 16 Aug 2021 00:44:05 +0200
+Completed At:   Mon, 16 Aug 2021 00:44:07 +0200
+Duration:       2s
+Pods Statuses:  0 Running / 1 Succeeded / 0 Failed
+Pod Template:
+  Labels:  controller-uid=03eb1244-f6ba-4ca6-b5c7-7a54a7be0bd0
+           job-name=sysinfo
+  Init Containers:
+   sysinfo:
+    Image:      carlos2380/sysinfo:v3
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      ./main
+      --pathfile=/work-dir/data.txt
+    Environment:  <none>
+    Mounts:
+      /work-dir from workdir (rw)
+  Containers:
+   printinfo:
+    Image:      carlos2380/printinfo:v3
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      ./main
+      --pathfile=/work-dir/data.txt
+    Environment:  <none>
+    Mounts:
+      /work-dir from workdir (rw)
+  Volumes:
+   workdir:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+Events:         <none>
